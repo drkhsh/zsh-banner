@@ -6,7 +6,7 @@
 
 # thx to yuhonas for inspiration and initial codebase <3
 
-set -eo pipefail
+set -o pipefail
 
 DEFAULT_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/ansimotd/" # trailing / is important
 export ANSI_MOTD_ART_DIR="${ANSI_MOTD_ART_DIR:-$DEFAULT_DIR}"
