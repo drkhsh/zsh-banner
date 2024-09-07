@@ -69,7 +69,7 @@ function ansi_art_random {
   else
     echo "\
 zsh-banner.plugin.zsh:
-I couldn't find any ansi art to display, I tried looking in '$ANSI_MOTD_ART_DIR' 😢
+I couldn't find any ansi/ascii art to display, I tried looking in '$ANSI_MOTD_ART_DIR' ... 😢
 " >&2
   fi;
 }
