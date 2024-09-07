@@ -8,7 +8,7 @@
 
 set -o pipefail
 
-DEFAULT_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/ansimotd/" # trailing / is important
+DEFAULT_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/banner/" # trailing / is important
 export ANSI_MOTD_ART_DIR="${ANSI_MOTD_ART_DIR:-$DEFAULT_DIR}"
 
 # create directory if necessary
