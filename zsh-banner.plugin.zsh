@@ -9,10 +9,10 @@
 set -o pipefail
 
 DEFAULT_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/banner/" # trailing / is important
-export ANSI_MOTD_ART_DIR="${ANSI_MOTD_ART_DIR:-$DEFAULT_DIR}"
+export ZSH_BANNER_DIR="${ZSH_BANNER_DIR:-$DEFAULT_DIR}"
 
 # create directory if necessary
-[ -d "$ANSI_MOTD_ART_DIR" ] || mkdir -p "$ANSI_MOTD_ART_DIR"
+[ -d "$ZSH_BANNER_DIR" ] || mkdir -p "$ZSH_BANNER_DIR"
 
 # find a random piece of ansi art to display
 function ansi_art_random_file {
@@ -24,17 +24,17 @@ function ansi_art_random_file {
          --extension asc \
          --absolute-path \
          --type f \
-         --search-path "$ANSI_MOTD_ART_DIR" |\
+         --search-path "$ZSH_BANNER_DIR" |\
          shuf -n 1
     else
-      find "$ANSI_MOTD_ART_DIR" -type f \
+      find "$ZSH_BANNER_DIR" -type f \
        -iname '*.ans' -or \
        -iname '*.asc' |\
        shuf -n 1
     fi;
   else
   	# no shuf on OpenBSD
-    find "$ANSI_MOTD_ART_DIR" -type f \
+    find "$ZSH_BANNER_DIR" -type f \
      -iname '*.ans' -or \
      -iname '*.asc' |\
      sort -R |\
@@ -49,30 +49,29 @@ function ansi_art_random {
   # optional use pv to limit rate we output
   viewer=(cat)
   if (( $+commands[pv] )); then
-    viewer=(pv --quiet --rate-limit ${ANSI_MOTD_RATE_LIMIT_OUTPUT:-1T})
+    viewer=(pv --quiet --rate-limit ${ZSH_BANNER_RATE_LIMIT_OUTPUT:-1T})
   fi
 
   if [ -n "$ansi_filename" ]; then
     # turn off automatic margins (a.k.a. line wrapping) if we've been told too
     # this is so it'll still render something usable even if the terminal is too narrow
-    if [ -n "$ANSI_MOTD_DISABLE_LINE_WRAPPING" ]; then print -n '\e[?7l'; fi;
+    if [ -n "$ZSH_BANNER_DISABLE_LINE_WRAPPING" ]; then print -n '\e[?7l'; fi;
 
     # convert from the original character set (Code page 437)
     # see https://en.wikipedia.org/wiki/Code_page_437
     iconv -f 437 < $ansi_filename | ${viewer}
 
     # restore automatic margins if we've been told too
-    if [ -n "$ANSI_MOTD_DISABLE_LINE_WRAPPING" ]; then print -n '\e[?7h'; fi;
+    if [ -n "$ZSH_BANNER_DISABLE_LINE_WRAPPING" ]; then print -n '\e[?7h'; fi;
 
     # record the filename in this session incase the user wants to find it later
-    export ANSI_MOTD_FILENAME="$ansi_filename"
+    export ZSH_BANNER_FILENAME="$ansi_filename"
   else
     echo "\
 zsh-banner.plugin.zsh:
-I couldn't find any ansi/ascii art to display, I tried looking in '$ANSI_MOTD_ART_DIR' ... 😢
+Couldn't find any ansi/ascii art to display in '$ZSH_BANNER_DIR' ... 😢
 " >&2
   fi;
 }
 
 ansi_art_random
-
