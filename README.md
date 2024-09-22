@@ -56,10 +56,10 @@ Head over to [16colo.rs](https://16colo.rs/) and if you find a year(s) you like
 you can download everything from that year using their rsync mirror.
 
 eg. to download everything from [1996](https://16colo.rs/year/1996/) to the
-`ANSI_MOTD_ART_DIR`:
+`ZSH_BANNER_DIR`:
 
 ```
-rsync -azvhP --include '*/' --include '*.ANS' --exclude '*' rsync://16colo.rs/pack/1996 "$ANSI_MOTD_ART_DIR"
+rsync -azvhP --include '*/' --include '*.ANS' --exclude '*' rsync://16colo.rs/pack/1996 "$ZSH_BANNER_DIR"
 ```
 
 #### artscene.textfiles.com
@@ -68,7 +68,7 @@ Find a pack you like at [artscene](http://artscene.textfiles.com/artpacks/) and
 unpack it into the ansi motd config directory.
 
 You can do this by copying any `.ans`, or `.asc` files containg ansi art into
-your `ANSI_MOTD_ART_DIR` directory which is derived from
+your `ZSH_BANNER_DIR` directory which is derived from
 `${XDG_CONFIG_HOME:-$HOME/.config}/ansimotd` (the plugin performs a recursive
 search for art so any directory nesting is fine).
 
@@ -76,9 +76,9 @@ search for art so any directory nesting is fine).
 
 The plugin exports the following useful variables to the session
 
-* `ANSI_MOTD_ART_DIR`  - the full path to the config directory where the plugin
+* `ZSH_BANNER_DIR`  - the full path to the config directory where the plugin
   will search for ansi art
-* `ANSI_MOTD_FILENAME` - the full file path to the last shown peice of ansi art,
+* `ZSH_BANNER_FILENAME` - the full file path to the last shown peice of ansi art,
   if you want to do something with it, laud over it, delete it etc
 
 There's also a handful of ENV variables you can use to configure the plugin
@@ -87,12 +87,12 @@ There's also a handful of ENV variables you can use to configure the plugin
 #### The real BBS experience
 
 To buffer the ansi art output at a fixed speed you can set the
-`ANSI_MOTD_RATE_LIMIT_OUTPUT` ENV variable.
+`ZSH_BANNER_RATE_LIMIT_OUTPUT` ENV variable.
 
 eg. to limit the ansi art rendering rate to a data rate of 8k:
 
 ```
-export ANSI_MOTD_RATE_LIMIT_OUTPUT="8k"
+export ZSH_BANNER_RATE_LIMIT_OUTPUT="8k"
 ```
 
 #### Small screens
@@ -102,7 +102,7 @@ If you happen to be running on a small fixed screen perhaps on something like
 to truncate the art to screen width:
 
 ```
-export ANSI_MOTD_DISABLE_LINE_WRAPPING=1
+export ZSH_BANNER_DISABLE_LINE_WRAPPING=1
 ```
 
 ### Note
