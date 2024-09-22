@@ -59,7 +59,8 @@ function ansi_art_random {
 
     # convert from the original character set (Code page 437)
     # see https://en.wikipedia.org/wiki/Code_page_437
-    iconv -f 437 < $ansi_filename | ${viewer}
+    # also remove \r
+    iconv -f 437 < $ansi_filename | tr -d '\r' | ${viewer}
 
     # restore automatic margins if we've been told too
     if [ -n "$ZSH_BANNER_DISABLE_LINE_WRAPPING" ]; then print -n '\e[?7h'; fi;
