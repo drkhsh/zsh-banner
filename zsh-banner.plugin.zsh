@@ -8,6 +8,12 @@
 
 set -o pipefail
 
+_exists() {
+	type $1 > /dev/null 2>&1
+}
+
+my_iconv=iconv
+_exists gnu-iconv && my_iconv=gnu-iconv
 DEFAULT_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/banner/" # trailing / is important
 export ZSH_BANNER_DIR="${ZSH_BANNER_DIR:-$DEFAULT_DIR}"
 
@@ -60,7 +66,7 @@ function ansi_art_random {
     # convert from the original character set (Code page 437)
     # see https://en.wikipedia.org/wiki/Code_page_437
     # also remove \r
-    iconv -f 437 < $ansi_filename | tr -d '\r' | ${viewer}
+    $my_iconv -f 437 < $ansi_filename | tr -d '\r' | ${viewer}
 
     # restore automatic margins if we've been told too
     if [ -n "$ZSH_BANNER_DISABLE_LINE_WRAPPING" ]; then print -n '\e[?7h'; fi;

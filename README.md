@@ -17,6 +17,7 @@ This is a simplified/slightly adapted and maintained fork of
 ### Dependencies
 
 * [zsh](https://www.zsh.org/)
+* On non-GNU Linux systems (e.g. Alpine): gnu-iconv
 
 #### Optional
 * [shuf]( https://en.wikipedia.org/wiki/Shuf) which is part of gnu
