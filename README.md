@@ -34,13 +34,13 @@ This is a simplified/slightly adapted and maintained fork of
 zinit light drkhsh/zsh-banner
 
 # for znap
-znap source yuhonas/zsh-ansimotd
+znap source drkhsh/zsh-banner
 
 # for antigen
-antigen bundle yuhonas/zsh-ansimotd
+antigen bundle drkhsh/zsh-banner
 
 # for zplug
-zplug "yuhonas/zsh-ansimotd"
+zplug "drkhsh/zsh-banner"
 
 # manually
 # Clone the repository and source it in your shell's rc file
