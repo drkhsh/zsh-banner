@@ -17,6 +17,8 @@ _exists gnu-iconv && my_iconv=gnu-iconv
 DEFAULT_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/banner/" # trailing / is important
 export ZSH_BANNER_DIR="${ZSH_BANNER_DIR:-$DEFAULT_DIR}"
 
+[ $TERM = "dumb" ] && return
+
 # create directory if necessary
 [ -d "$ZSH_BANNER_DIR" ] || mkdir -p "$ZSH_BANNER_DIR"
 
